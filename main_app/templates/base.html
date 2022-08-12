@@ -13,9 +13,18 @@
     <header>
         <nav>
             <ul>
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
+                <li><a href="{% url 'home' %}">Home</a></li> <!--SHOWS SINGLE RANDOM RECIPE AND ENCOURAGES SIGN UP-->
+                <li><a href="{% url 'about' %}">About</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="">View All Recipes</a></li> <!--GOES HERE ONCE THEY LOG IN-->
+                    <li><a href="">My Recipes</a></li>
+                    <li><a href="">Add New Recipe</a></li>
+                    <li><a href="">Add New Ingredient</a></li>
+                    <li><a href="">Log Out</a></li>
+                {% else %}
+                    <li><a href="">Sign Up</a></li>
+                    <li><a href="">Log In</a></li>
+            {% endif %}
             </ul>
         </nav>
     </header>
