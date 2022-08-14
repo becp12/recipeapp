@@ -3,4 +3,12 @@
 
 <h1>Recipe Detail</h1>
 
+<h2>{{ recipe.title }}</h2>
+<h5>Chef: {{ recipe.chef }}</h5>
+<h5>Servings: {{ recipe.servings }}</h5>
+<h5>Prep Time: {{ recipe.preptime}}</h5>
+<h5>Cooking Time: {{ recipe.cookingtime }}</h5>
+<h5>Category: {{ recipe.get_category_display }}</h5>
+<h5>Method: {{ recipe.method }}</h5>
+
 {% endblock %}
