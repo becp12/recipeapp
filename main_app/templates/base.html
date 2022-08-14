@@ -16,9 +16,9 @@
                 <li><a href="{% url 'home' %}">Home</a></li> <!--SHOWS SINGLE RANDOM RECIPE AND ENCOURAGES SIGN UP-->
                 <li><a href="{% url 'about' %}">About</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="">View All Recipes</a></li> <!--GOES HERE ONCE THEY LOG IN-->
+                    <li><a href="{% url 'index' %}">View All Recipes</a></li> <!--GOES HERE ONCE THEY LOG IN-->
                     <li><a href="">My Recipes</a></li>
-                    <li><a href="">Add New Recipe</a></li>
+                    <li><a href="{% url 'recipes_create' %}">Add New Recipe</a></li>
                     <li><a href="">Add New Ingredient</a></li>
                     <li><a href="{% url 'logout' %}">Log Out</a></li>
                 {% else %}
