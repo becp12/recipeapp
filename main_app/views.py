@@ -12,12 +12,21 @@ from .models import Recipe
 def home(request):
   return render(request, 'home.html')
 
+
 def about(request):
   return render(request, 'about.html')
 
+
 @login_required
 def recipes_index(request):
-  return render(request, 'recipes/index.html')    
+  recipes = Recipe.objects.all()
+  return render(request, 'recipes/index.html', { 'recipes': recipes })    
+
+
+def recipes_detail(request, recipe_id):
+  recipe = Recipe.objects.get(id=recipe_id, chef=request.user)
+  return render(request, 'recipes/detail.html', { 'recipe': recipe })
+
 
 def signup(request):
   error_message = ''
@@ -33,13 +42,12 @@ def signup(request):
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
 
+
 class RecipeCreate(CreateView, LoginRequiredMixin):
   model = Recipe
   fields = ['title', 'servings', 'preptime', 'cookingtime', 'category', 'method']
   # success_url = '/recipes/'
 
   def form_valid(self, form):
-    print('***')
-    print(self.request.user)
     form.instance.chef = self.request.user
     return super().form_valid(form)
