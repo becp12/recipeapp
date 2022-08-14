@@ -11,4 +11,8 @@
 <h5>Category: {{ recipe.get_category_display }}</h5>
 <h5>Method: {{ recipe.method }}</h5>
 
+
+<a href="{% url 'recipe_update' recipe.id %}">Edit</a>
+<a href="{% url 'recipe_delete' recipe.id %}">Delete</a>
+
 {% endblock %}

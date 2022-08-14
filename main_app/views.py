@@ -46,8 +46,17 @@ def signup(request):
 class RecipeCreate(CreateView, LoginRequiredMixin):
   model = Recipe
   fields = ['title', 'servings', 'preptime', 'cookingtime', 'category', 'method']
-  # success_url = '/recipes/'
 
   def form_valid(self, form):
     form.instance.chef = self.request.user
     return super().form_valid(form)
+
+
+class RecipeUpdate(UpdateView, LoginRequiredMixin):
+  model = Recipe
+  fields = ['title', 'servings', 'preptime', 'cookingtime', 'category', 'method']
+
+
+class RecipeDelete(DeleteView, LoginRequiredMixin):
+  model = Recipe
+  success_url = '/recipes/'
