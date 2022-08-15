@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from .models import Recipe, Comment
+from .forms import CommentForm
 
 # Create your views here.
 def home(request):
@@ -25,7 +26,18 @@ def recipes_index(request):
 
 def recipes_detail(request, recipe_id):
   recipe = Recipe.objects.get(id=recipe_id, chef=request.user)
-  return render(request, 'recipes/detail.html', { 'recipe': recipe })
+  comment_form = CommentForm()
+  return render(request, 'recipes/detail.html', { 'recipe': recipe, 'comment_form': comment_form })
+
+@login_required
+def add_comment(request, recipe_id):
+  form = CommentForm(request.POST)
+  if form.is_valid():
+    new_comment = form.save(commit=False)
+    new_comment.recipe_id = recipe_id
+    new_comment.chef_id = request.user.id
+    new_comment.save()
+  return redirect('detail', recipe_id=recipe_id)
 
 
 def signup(request):
@@ -61,11 +73,13 @@ class RecipeDelete(DeleteView, LoginRequiredMixin):
   model = Recipe
   success_url = '/recipes/'
 
-class CommentCreate(CreateView, LoginRequiredMixin):
-  model = Comment
-  fields = ['content',]
 
-  def form_valid(self, form):
-    form.instance.chef = self.request.user
-    form.instance.recipe = self.request.recipe
-    return super().form_valid(form)
+# class CommentCreate(CreateView, LoginRequiredMixin):
+#   model = Comment
+#   fields = ['content',]
+#   # form_class = commentForm
+
+#   def form_valid(self, form):
+#     form.instance.chef = self.request.user
+#     form.instance.recipe = self.request.recipe
+#     return super().form_valid(form)
