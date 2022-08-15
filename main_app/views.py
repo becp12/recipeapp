@@ -75,4 +75,4 @@ class RecipeDelete(DeleteView, LoginRequiredMixin):
 
 class CommentDelete(DeleteView, LoginRequiredMixin):
   model = Comment
-  success_url = '/recipes/'
+  success_url = f'/recipes/{{recipe_id}}/'
