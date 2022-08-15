@@ -73,13 +73,6 @@ class RecipeDelete(DeleteView, LoginRequiredMixin):
   model = Recipe
   success_url = '/recipes/'
 
-
-# class CommentCreate(CreateView, LoginRequiredMixin):
-#   model = Comment
-#   fields = ['content',]
-#   # form_class = commentForm
-
-#   def form_valid(self, form):
-#     form.instance.chef = self.request.user
-#     form.instance.recipe = self.request.recipe
-#     return super().form_valid(form)
+class CommentDelete(DeleteView, LoginRequiredMixin):
+  model = Comment
+  success_url = '/recipes/'
