@@ -3,16 +3,27 @@
 
 <h1>Recipe Detail</h1>
 
-<h2>{{ recipe.title }}</h2>
-<h5>Chef: {{ recipe.chef }}</h5>
-<h5>Servings: {{ recipe.servings }}</h5>
-<h5>Prep Time: {{ recipe.preptime}}</h5>
-<h5>Cooking Time: {{ recipe.cookingtime }}</h5>
-<h5>Category: {{ recipe.get_category_display }}</h5>
-<h5>Method: {{ recipe.method }}</h5>
-
+<div>
+    <h2>{{ recipe.title }}</h2>
+    <h5>Chef: {{ recipe.chef }}</h5>
+    <h5>Servings: {{ recipe.servings }}</h5>
+    <h5>Prep Time: {{ recipe.preptime}}</h5>
+    <h5>Cooking Time: {{ recipe.cookingtime }}</h5>
+    <h5>Category: {{ recipe.get_category_display }}</h5>
+    <h5>Method: {{ recipe.method }}</h5>
+</div>
 
 <a href="{% url 'recipe_update' recipe.id %}">Edit</a>
 <a href="{% url 'recipe_delete' recipe.id %}">Delete</a>
+
+<div>
+    <form action="{% url 'comment_create' recipe.id %}" method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Submit">
+    </form>
+</div>
 
 {% endblock %}

@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.core.validators import MaxValueValidator, MinValueValidator
+from datetime import date
 
 # Create your models here.
 CATEGORIES = (
@@ -32,3 +34,15 @@ class Recipe(models.Model):
         return reverse('home')
         # , kwargs={'recipe_id': self.id}
 
+class Comment(models.Model):
+    chef = models.ForeignKey(User, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    content = models.TextField(max_length=500)
+    # rating = models.IntegerField(
+    #     default = 5,
+    #     validators = [MinValueValidator(0), MaxValueValidator(5)]
+    # )
+    created = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.content

@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .models import Recipe
+from .models import Recipe, Comment
 
 # Create your views here.
 def home(request):
@@ -60,3 +60,12 @@ class RecipeUpdate(UpdateView, LoginRequiredMixin):
 class RecipeDelete(DeleteView, LoginRequiredMixin):
   model = Recipe
   success_url = '/recipes/'
+
+class CommentCreate(CreateView, LoginRequiredMixin):
+  model = Comment
+  fields = ['content',]
+
+  def form_valid(self, form):
+    form.instance.chef = self.request.user
+    form.instance.recipe = self.request.recipe
+    return super().form_valid(form)
