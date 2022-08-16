@@ -24,6 +24,10 @@ def recipes_index(request):
   return render(request, 'recipes/index.html', { 'recipes': recipes })    
 
 
+def recipes_myindex(request):
+  recipes = Recipe.objects.filter(chef=request.user)
+  return render(request,'recipes/myindex.html', { 'recipes': recipes })
+
 def recipes_detail(request, recipe_id):
   recipe = Recipe.objects.get(id=recipe_id, chef=request.user)
   comment_form = CommentForm()
@@ -58,6 +62,7 @@ def signup(request):
 class RecipeCreate(CreateView, LoginRequiredMixin):
   model = Recipe
   fields = ['title', 'servings', 'preptime', 'cookingtime', 'category', 'ingredients', 'method']
+  success_url = '/recipes/my/'
 
   def form_valid(self, form):
     form.instance.chef = self.request.user
