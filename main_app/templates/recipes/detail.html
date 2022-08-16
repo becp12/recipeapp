@@ -70,6 +70,9 @@
             <tr>
                 <td>{{ tiptrick.content|linebreaks }}</td>
             </tr>
+            <tr>
+                <td><a href="{% url 'tiptrick_delete' tiptrick.id %}">Delete Tip / Trick</a></td>
+            </tr>
         {% endfor %}
     </table>
 </div>

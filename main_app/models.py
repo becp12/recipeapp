@@ -34,6 +34,9 @@ class Recipe(models.Model):
         return reverse('home')
         # , kwargs={'recipe_id': self.id}
 
+    # class Meta:
+    #     ordering = ['-title']
+
 class Comment(models.Model):
     chef = models.ForeignKey(User, on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)

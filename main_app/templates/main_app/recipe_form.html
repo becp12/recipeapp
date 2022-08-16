@@ -2,38 +2,35 @@
 {% block content %}
 
 {% if object %}
-  <h1>Edit {{ object.name }}</h1>
-{% else %}
-  <h1>Add Recipe</h1>
-{% endif %}
-
-<form action="" method="POST" id="recipe-form">
+  <h1>Edit {{ object.title }}</h1>
+  <form action="" method="POST" id="recipe-form">
     {% csrf_token %}
     <table>
         <tr>
           <td>Title:</td>
-          <td><input name="title" type="text" required></td>
+          <td><input name="title" type="text" value="{{ object.title }}" required></td>
         </tr>
         <tr>
           <td>Servings:</td>
-          <td><input name="servings" type="number"></td>
+          <td><input name="servings" type="number" value="{{ object.servings }}" ></td>
         </tr>
         <tr>
           <td>Prep Time:</td>
-          <td><input name="preptime" type="number"></td>
+          <td><input name="preptime" type="number" value="{{ object.preptime }}" ></td>
         </tr>
         <tr>
           <td>Cooking Time:</td>
-          <td><input name="cookingtime" type="number"></td>
+          <td><input name="cookingtime" type="number" value="{{ object.cookingtime }}" ></td>
         </tr>
         <tr>
           <td>Category:</td>
           <td>
-            <select name="category">
-              <option value="" disabled selected>Select a Category</option>
+            <select name="category" id="category">
+              <!-- <option value="" disabled selected>Select a Category</option> -->
+              <option value="{{ object.category }}" selected>{{ object.get_category_display }}</option>
               <option value="VT">Vegetarian</option>
               <option value="VE">Vegan</option>
-              <option value="B">Vegetarian</option>
+              <option value="B">Breakfast</option>
               <option value="L">Lunch</option>
               <option value="D">Dinner</option>
             </select>
@@ -41,14 +38,64 @@
         </tr>
         <tr>
           <td>Ingredients:</td>
-          <td><textarea name="ingredients" id="recipe-form" cols="20" rows="10" placeholder="Please add your ingredients, and make a new line for each ingredient."></textarea></td>
+          <td><textarea name="ingredients" id="recipe-form" cols="20" rows="10" placeholder="Please add your ingredients, and make a new line for each ingredient.">{{ object.ingredients }}</textarea></td>
         </tr>
         <tr>
           <td>Method:</td>
-          <td><textarea name="method" id="" cols="20" rows="10" placeholder="Please add your steps and make a new line for each step." required></textarea></td>
+          <td><textarea name="method" id="" cols="20" rows="10" required>{{ object.method }}</textarea></td>
         </tr>
     </table>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Update Recipe">
 </form>
+
+
+
+{% else %}
+  <h1>Add Recipe</h1>
+  <form action="" method="POST" id="recipe-form">
+      {% csrf_token %}
+      <table>
+          <tr>
+            <td>Title:</td>
+            <td><input name="title" type="text" required></td>
+          </tr>
+          <tr>
+            <td>Servings:</td>
+            <td><input name="servings" type="number" required></td>
+          </tr>
+          <tr>
+            <td>Prep Time:</td>
+            <td><input name="preptime" type="number" required></td>
+          </tr>
+          <tr>
+            <td>Cooking Time:</td>
+            <td><input name="cookingtime" type="number" required></td>
+          </tr>
+          <tr>
+            <td>Category:</td>
+            <td>
+              <select name="category" required>
+                <option value="" disabled selected>Select a Category</option>
+                <option value="VT">Vegetarian</option>
+                <option value="VE">Vegan</option>
+                <option value="B">Vegetarian</option>
+                <option value="L">Lunch</option>
+                <option value="D">Dinner</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Ingredients:</td>
+            <td><textarea name="ingredients" id="recipe-form" cols="20" rows="10" placeholder="Please add your ingredients, and make a new line for each ingredient." required></textarea></td>
+          </tr>
+          <tr>
+            <td>Method:</td>
+            <td><textarea name="method" id="" cols="20" rows="10" placeholder="Please add your steps and make a new line for each step." required></textarea></td>
+          </tr>
+      </table>
+      <input type="submit" value="Add Recipe">
+  </form>
+
+{% endif %}
 
 {% endblock %}

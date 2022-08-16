@@ -14,7 +14,7 @@ urlpatterns = [
     path('recipes/<int:recipe_id>/add_comment/', views.add_comment, name='add_comment'),
     path('recipes/<int:pk>/comment_delete', views.CommentDelete.as_view(), name='comment_delete'),
     path('recipes/<int:recipe_id>/add_tiptrick/', views.add_tiptrick, name='add_tiptrick'),
-    # path('recipes/<int:pk>/tiptrick_delete', views.tiptrickDelete.as_view(), name='tiptrick_delete'),
+    path('recipes/<int:pk>/tiptrick_delete', views.TipTrickDelete.as_view(), name='tiptrick_delete'),
 
 ]
 
