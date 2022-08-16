@@ -7,10 +7,46 @@
   <h1>Add Recipe</h1>
 {% endif %}
 
-<form action="" method="POST">
+<form action="" method="POST" id="recipe-form">
     {% csrf_token %}
     <table>
-        {{ form.as_table }}
+        <tr>
+          <td>Title:</td>
+          <td><input name="title" type="text"></td>
+        </tr>
+        <tr>
+          <td>Servings:</td>
+          <td><input name="servings" type="number"></td>
+        </tr>
+        <tr>
+          <td>Prep Time:</td>
+          <td><input name="preptime" type="number"></td>
+        </tr>
+        <tr>
+          <td>Cooking Time:</td>
+          <td><input name="cookingtime" type="number"></td>
+        </tr>
+        <tr>
+          <td>Category:</td>
+          <td>
+            <select name="category">
+              <option value="" disabled selected>Select a Category</option>
+              <option value="VT">Vegetarian</option>
+              <option value="VE">Vegan</option>
+              <option value="B">Vegetarian</option>
+              <option value="L">Lunch</option>
+              <option value="D">Dinner</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Ingredients:</td>
+          <td><textarea name="ingredients" id="recipe-form" cols="20" rows="10" placeholder="Please add your ingredients, and make a new line for each ingredient."></textarea></td>
+        </tr>
+        <tr>
+          <td>Method:</td>
+          <td><textarea name="method" id="" cols="20" rows="10" placeholder="Please add your steps and make a new line for each step."></textarea></td>
+        </tr>
     </table>
     <input type="submit" value="Submit">
 </form>

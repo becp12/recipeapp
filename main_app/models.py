@@ -25,7 +25,7 @@ class Recipe(models.Model):
         default=CATEGORIES[0][0]
     )
     method = models.TextField(max_length=1000)
-    # ingredients = models.ManyToManyField(Ingredient)
+    ingredients = models.TextField(max_length=500)
 
     def __str__(self):
         return self.title

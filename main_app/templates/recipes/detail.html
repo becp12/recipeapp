@@ -10,7 +10,8 @@
     <h5>Prep Time: {{ recipe.preptime}}</h5>
     <h5>Cooking Time: {{ recipe.cookingtime }}</h5>
     <h5>Category: {{ recipe.get_category_display }}</h5>
-    <h5>Method: {{ recipe.method }}</h5>
+    <h5>Ingredients: {{ recipe.ingredients|linebreaks }}</h5>
+    <h5>Method: {{ recipe.method|linebreaks }}</h5>
 </div>
 
 <a href="{% url 'recipe_update' recipe.id %}">Edit</a>
@@ -34,7 +35,7 @@
                 <td>{{ comment.created|date:"M d, Y" }}</td>
             </tr>
             <tr>
-                <td>{{ comment.content }}</td>
+                <td>{{ comment.content|linebreaks }}</td>
             </tr>
             <tr>
                 <td><a href="{% url 'comment_delete' comment.id %}">Delete Comment</a></td>
