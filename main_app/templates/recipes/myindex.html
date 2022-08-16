@@ -3,15 +3,15 @@
 
 <h1>My Recipes</h1>
 
-{% for recipe in recipes %}
-    <div>
-        <a href="{% url 'detail' recipe.id %}">
-            <div>
+<div class="all-recipes">
+    {% for recipe in recipes %}
+        <a href="{% url 'detail' recipe.id %}" class="recipe-card">
+            <div class="recipe-details">
                 <h2>{{ recipe.title }}</h2>
-                <p>Total Time: {{ recipe.preptime | add:recipe.cookingtime }} minutes</p>
+                <h3>Total Time: {{ recipe.preptime | add:recipe.cookingtime }} minutes</h3>
             </div>
         </a>
-    </div>
-{% endfor %}
+    {% endfor %}
+</div>
 
 {% endblock %}

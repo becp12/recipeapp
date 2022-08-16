@@ -31,7 +31,7 @@ def recipes_myindex(request):
 
 
 def recipes_detail(request, recipe_id):
-  recipe = Recipe.objects.get(id=recipe_id, chef=request.user)
+  recipe = Recipe.objects.get(id=recipe_id)
   comment_form = CommentForm()
   tiptrick_form = TipTrickForm()
   return render(request, 'recipes/detail.html', {
@@ -91,6 +91,7 @@ class RecipeCreate(CreateView, LoginRequiredMixin):
 class RecipeUpdate(UpdateView, LoginRequiredMixin):
   model = Recipe
   fields = ['title', 'servings', 'preptime', 'cookingtime', 'category', 'ingredients', 'method']
+  success_url = '/recipes/my/'
 
 
 class RecipeDelete(DeleteView, LoginRequiredMixin):
@@ -101,3 +102,12 @@ class RecipeDelete(DeleteView, LoginRequiredMixin):
 class CommentDelete(DeleteView, LoginRequiredMixin):
   model = Comment
   success_url = f'/recipes/{{recipe_id}}/'
+
+
+class TipTrickDelete(DeleteView, LoginRequiredMixin):
+  model = TipTrick
+  success_url = f'/recipes/{{recipe_id}}/'
+
+
+def random(self):
+  return self.objects.order_by('?').values('cookingtime','title','chef_id').first()
