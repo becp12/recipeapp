@@ -21,6 +21,9 @@
     <form action="{% url 'add_comment' recipe.id %}" method="POST">
         {% csrf_token %}
         <table>
+            <tr>
+                <td>Comments</td>
+            </tr>
             {{ comment_form.as_table }}
         </table>
         <input type="submit" value="Post Comment">
@@ -39,6 +42,33 @@
             </tr>
             <tr>
                 <td><a href="{% url 'comment_delete' comment.id %}">Delete Comment</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div>
+    <form action="{% url 'add_tiptrick' recipe.id %}" method="POST">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Tips and Tricks</td>
+            </tr>
+            {{ tiptrick_form.as_table }}
+        </table>
+        <input type="submit" value="Post Tips or Tricks">
+    </form>
+</div>
+
+<div>
+    <table>
+        {% for tiptrick in recipe.tiptrick_set.all %}
+            <tr>
+                <td>{{ tiptrick.chef }}</td>
+                <td>{{ tiptrick.created|date:"M d, Y" }}</td>
+            </tr>
+            <tr>
+                <td>{{ tiptrick.content|linebreaks }}</td>
             </tr>
         {% endfor %}
     </table>

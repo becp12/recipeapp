@@ -6,8 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .models import Recipe, Comment
-from .forms import CommentForm
+from .models import Recipe, Comment, TipTrick
+from .forms import CommentForm, TipTrickForm
 
 # Create your views here.
 def home(request):
@@ -24,14 +24,22 @@ def recipes_index(request):
   return render(request, 'recipes/index.html', { 'recipes': recipes })    
 
 
+@login_required
 def recipes_myindex(request):
   recipes = Recipe.objects.filter(chef=request.user)
   return render(request,'recipes/myindex.html', { 'recipes': recipes })
 
+
 def recipes_detail(request, recipe_id):
   recipe = Recipe.objects.get(id=recipe_id, chef=request.user)
   comment_form = CommentForm()
-  return render(request, 'recipes/detail.html', { 'recipe': recipe, 'comment_form': comment_form })
+  tiptrick_form = TipTrickForm()
+  return render(request, 'recipes/detail.html', {
+    'recipe': recipe,
+    'comment_form': comment_form,
+    'tiptrick_form': tiptrick_form
+  })
+
 
 @login_required
 def add_comment(request, recipe_id):
@@ -41,6 +49,17 @@ def add_comment(request, recipe_id):
     new_comment.recipe_id = recipe_id
     new_comment.chef_id = request.user.id
     new_comment.save()
+  return redirect('detail', recipe_id=recipe_id)
+
+
+@login_required
+def add_tiptrick(request, recipe_id):
+  form = TipTrickForm(request.POST)
+  if form.is_valid():
+    new_tiptrick = form.save(commit=False)
+    new_tiptrick.recipe_id = recipe_id
+    new_tiptrick.chef_id = request.user.id
+    new_tiptrick.save()
   return redirect('detail', recipe_id=recipe_id)
 
 
@@ -77,6 +96,7 @@ class RecipeUpdate(UpdateView, LoginRequiredMixin):
 class RecipeDelete(DeleteView, LoginRequiredMixin):
   model = Recipe
   success_url = '/recipes/'
+
 
 class CommentDelete(DeleteView, LoginRequiredMixin):
   model = Comment
