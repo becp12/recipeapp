@@ -6,12 +6,28 @@
 <div>
     <h2>{{ recipe.title }}</h2>
     <h5>Chef: {{ recipe.chef }}</h5>
+    <div>
+        {% for photo in recipe.photo_set.all %}
+          <img src="{{photo.url}}">
+        {% empty %}
+          <div>No Photos Uploaded</div>
+        {% endfor %}
+    </div>
     <h5>Servings: {{ recipe.servings }}</h5>
     <h5>Prep Time: {{ recipe.preptime}}</h5>
     <h5>Cooking Time: {{ recipe.cookingtime }}</h5>
     <h5>Category: {{ recipe.get_category_display }}</h5>
     <h5>Ingredients: {{ recipe.ingredients|linebreaks }}</h5>
     <h5>Method: {{ recipe.method|linebreaks }}</h5>
+</div>
+
+<div>
+    <form action="{% url 'add_photo' recipe.id %}" enctype="multipart/form-data" method="POST" alt="Recipe Photo" >
+        {% csrf_token %}
+        <input type="file" name="photo-file">
+        <br><br>
+        <input type="submit" value="Upload Photo">
+    </form>
 </div>
 
 <a href="{% url 'recipe_update' recipe.id %}">Edit</a>

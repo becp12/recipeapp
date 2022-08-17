@@ -5,7 +5,7 @@
 
 <div class="all-recipes">
     {% for recipe in recipes %}
-        <a href="{% url 'detail' recipe.id %}" class="recipe-card">
+        <a href="{% url 'detail' recipe.id %}" class="recipe-card" style="background-image: url('{{ recipe.photo_set.all.0.url }}')">
             <div class="recipe-details">
                 <h2>{{ recipe.title }}</h2>
                 <h3>Total Time: {{ recipe.preptime | add:recipe.cookingtime }} minutes</h3>

@@ -1,3 +1,7 @@
+import os
+import uuid
+import boto3
+
 from django.shortcuts import render, redirect
 # from django.http import HttpResponse
 from django.contrib.auth import login
@@ -6,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .models import Recipe, Comment, TipTrick
+from .models import Recipe, Comment, TipTrick, Photo
 from .forms import CommentForm, TipTrickForm
 
 # Create your views here.
@@ -37,7 +41,7 @@ def recipes_detail(request, recipe_id):
   return render(request, 'recipes/detail.html', {
     'recipe': recipe,
     'comment_form': comment_form,
-    'tiptrick_form': tiptrick_form
+    'tiptrick_form': tiptrick_form,
   })
 
 
@@ -111,3 +115,24 @@ class TipTrickDelete(DeleteView, LoginRequiredMixin):
 
 def random(self):
   return self.objects.order_by('?').values('cookingtime','title','chef_id').first()
+
+@login_required
+def add_photo(request, recipe_id):
+  # photo-file will be the "name" attribute on the <input type="file">
+  photo_file = request.FILES.get('photo-file', None)
+  if photo_file:
+    s3 = boto3.client('s3')
+    # need a unique "key" for S3 / needs image file extension too
+    key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+    # just in case something goes wrong
+    try:
+      bucket = os.environ['S3_BUCKET']
+      s3.upload_fileobj(photo_file, bucket, key)
+      # build the full url string
+      url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+      # we can assign to recipe_id or recipe (if you have a recipe object)
+      Photo.objects.create(url=url, recipe_id=recipe_id)
+    except Exception as e:
+      print('An error occurred uploading file to S3')
+      print(e)
+  return redirect('detail', recipe_id=recipe_id)

@@ -61,6 +61,10 @@ footer {
     height: 2rem;
 }
 
+img {
+    height: 25rem;
+}
+
 /* --- INDEX VIEW --- */
 .all-recipes {
     display: grid;
@@ -69,10 +73,11 @@ footer {
     margin: 0 3rem;
 }
 
- .recipe-card {
+.recipe-card {
     position: relative;
     border: 1px solid black;
-    background-image: url("https://i.imgur.com/A14QwVW.jpeg");
+    /* background-image: url("https://i.imgur.com/A14QwVW.jpeg"); */
+    /* background-image: url("{{ photo.recipe.url }}"); */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
