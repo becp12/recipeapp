@@ -13,6 +13,7 @@ CATEGORIES = (
     ('D', 'Dinner'),
 )
 
+
 class Recipe(models.Model):
     title = models.CharField(max_length=100)
     chef = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -26,6 +27,7 @@ class Recipe(models.Model):
     )
     method = models.TextField(max_length=1000)
     ingredients = models.TextField(max_length=500)
+    # photo = models.OneToOneField(Photo, on_delete=models.CASCADE, primary_key=True)
 
     def __str__(self):
         return self.title
@@ -59,3 +61,11 @@ class TipTrick(models.Model):
 
     def __str__(self):
         return self.content
+
+
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Photo for recipe_id: {self.recipe_id} @{self.url}"
