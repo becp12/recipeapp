@@ -12,7 +12,7 @@
   <form action="" method="POST">
     {% csrf_token %}
     <input type="submit" value="Yes - Delete!" class="btn">
-    <a href="{% url 'detail' object.id %}"><button class="btn">Cancel</button></a>
+    <a href="{% url 'detail' object.recipe.id %}">Cancel</a>
   </form>
 
 </div>

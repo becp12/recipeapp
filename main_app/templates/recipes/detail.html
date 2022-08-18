@@ -46,7 +46,7 @@
 
     <div class="all-comment">
         <div class="add-comment">
-            <form action="{% url 'add_comment' recipe.id %}" method="POST" class="add-tiptrick">
+            <form action="{% url 'add_comment' recipe.id %}" method="POST" class="tiptrick-form">
                 {% csrf_token %}
                 <p class="table-headers">Comments</p>
                 {{ comment_form.as_p }}
@@ -72,7 +72,7 @@
 
     <div class="all-tiptrick">
         <div class="add-tiptrick">
-            <form action="{% url 'add_tiptrick' recipe.id %}" method="POST" class="add-tiptrick">
+            <form action="{% url 'add_tiptrick' recipe.id %}" method="POST" class="tiptrick-form">
                 {% csrf_token %}
                 <p class="table-headers">Tips and Tricks</p>
                 {{ comment_form.as_p }}

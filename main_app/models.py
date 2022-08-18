@@ -30,7 +30,7 @@ class Recipe(models.Model):
     # photo = models.OneToOneField(Photo, on_delete=models.CASCADE, primary_key=True)
 
     def __str__(self):
-        return self.title
+        return f'{self.title} ({self.id})'
 
     def get_absolute_url(self):
         return reverse('home')

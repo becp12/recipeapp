@@ -23,10 +23,6 @@ def home(request):
   return render(request, 'home.html', { 'recipe': recipe })
 
 
-def about(request):
-  return render(request, 'about.html')
-
-
 @login_required
 def recipes_index(request):
   recipes = Recipe.objects.all()
@@ -90,7 +86,8 @@ def signup(request):
 class RecipeCreate(CreateView, LoginRequiredMixin):
   model = Recipe
   fields = ['title', 'servings', 'preptime', 'cookingtime', 'category', 'ingredients', 'method']
-  success_url = '/recipes/my/'
+  def get_success_url(self):
+    return f"/recipes/{self.object.id}"
 
   def form_valid(self, form):
     form.instance.chef = self.request.user
@@ -100,7 +97,8 @@ class RecipeCreate(CreateView, LoginRequiredMixin):
 class RecipeUpdate(UpdateView, LoginRequiredMixin):
   model = Recipe
   fields = ['title', 'servings', 'preptime', 'cookingtime', 'category', 'ingredients', 'method']
-  success_url = '/recipes/my/'
+  def get_success_url(self):
+    return f"/recipes/{self.object.id}"
 
 
 class RecipeDelete(DeleteView, LoginRequiredMixin):
@@ -110,12 +108,14 @@ class RecipeDelete(DeleteView, LoginRequiredMixin):
 
 class CommentDelete(DeleteView, LoginRequiredMixin):
   model = Comment
-  success_url = f'/recipes/{{recipe_id}}/'
+  def get_success_url(self):
+    return f"/recipes/{self.object.recipe.id}"
 
 
 class TipTrickDelete(DeleteView, LoginRequiredMixin):
   model = TipTrick
-  success_url = f'/recipes/{{recipe_id}}/'
+  def get_success_url(self):
+    return f"/recipes/{self.object.recipe.id}"
 
 
 def random(self):
