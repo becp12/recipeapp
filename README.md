@@ -1,9 +1,10 @@
 <img src="https://i.imgur.com/pIAZUJ1.png">
-# Simply Recipes
 
+<center>
 <b>Ernest Maitland</b><br>
 <b>Tony Brockett</b><br>
 <b>Bec Preece</b><br>
+</center>
 
 ## Background
 
@@ -13,11 +14,14 @@ With Simply Recipes you will be able to create new recipes and view submissions 
 
 ## Screenshots
 
-<img src="">
-
-<img src="">
-
-<img src="">
+Homepage <br>
+<img src="https://i.imgur.com/UhTbSxG.jpg">
+<br>
+Index Template <br>
+<img src="https://i.imgur.com/NVv77ME.jpg">
+<br>
+Detail Template <br>
+<img src="https://i.imgur.com/OdtSypO.png">
 
 
 ## Technologies Used
