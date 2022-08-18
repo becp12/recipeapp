@@ -14,14 +14,17 @@ body {
 
 header {
     background-color: lightgray;
+    display: flex;
+    justify-content: flex-end;
     width: 100%;
 }
+
 
 nav {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    height: 5rem;
+    height: 9rem;
 }
 
 nav > ul {
@@ -50,6 +53,7 @@ nav > ul > li > a:hover, nav > ul > li > a:visited {
 
 h1 {
     text-align: center;
+    font-size: 3rem;
 }
 
 footer {
@@ -61,18 +65,26 @@ footer {
     height: 2rem;
 }
 
-img {
-    height: 25rem;
+.banner-logo {
+    height: 9rem;
+    padding: .5rem;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 
 .btn {
-    background-color: black;
-    color: white;
+    background-color: skyblue;
+    color: blue;
+    border: .1rem solid black;
+    padding: 1rem;
+    border-radius: 1rem;
+    width: 15rem;
 }
 
 .btn:hover {
-    background-color: white;
-    color: black;
+    background-color: lightblue;
+    color: blue;
 }
 
 input#file-upload-button {
@@ -117,17 +129,16 @@ input#file-upload-button:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border-top: 1px solid black;
 }
 
 /* --- DETAIL VIEW --- */
 .detail-page {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 3fr 0.5fr 3fr;
-}
-
-.detail-page > * {
-    border: 1px solid black;
+    grid-template-rows: .25fr 1fr .2fr 1fr;
+    width: 80%;
+    margin: 0 auto;
 }
 
 .title {
@@ -138,6 +149,14 @@ input#file-upload-button:hover {
     align-items: center;
 }
 
+.title > h1 {
+    font-size: 5rem;
+}
+
+.title > h5 {
+    font-size: 1.5rem;
+}
+
 .photo {
     display: flex;
     justify-content: center;
@@ -146,13 +165,15 @@ input#file-upload-button:hover {
 
 .photo > img {
     border-radius: 5rem 5rem;
+    height: 40rem;
 }
 
 .recipe-all {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-    font-size: 3rem;
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: space-evenly;
 }
 
 .servings {
@@ -160,9 +181,20 @@ input#file-upload-button:hover {
     grid-column: 1 / span 2;
 }
 
+.time {
+    text-align: center;
+}
+
 .category {
     grid-column: 1 / span 2;
     text-align: center;
+}
+
+.method-ingred {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    margin: 2rem 2rem 0;
 }
 
 .heading {
@@ -170,19 +202,31 @@ input#file-upload-button:hover {
 }
 
 .contentheader {
-    font-size: 2rem;
+    font-size: 1.5rem;
+    border: 1px dotted black;
+    padding: 1rem;
 }
 
-.time {
-    text-align: center;
+.heading, .contentheader {
+    margin: 1rem;
 }
 
-
-.add-photo {
+.ingredients {
     display: flex;
-    flex-direction: column;
+    justify-content: flex-end;
+    
+}
+
+.add-photo, .edit-delete {
+    display: flex;
+    justify-content: center;
     align-items: center;
 }
+
+.edit-delete > * {
+    margin: 1rem;
+}
+
 
 /* -- COMMENTS & TIPS / TRICKS -- */
 .add-tiptrick {
@@ -193,41 +237,112 @@ input#file-upload-button:hover {
     margin-bottom: 1rem;
 }
 
-.tiptrickhead {
-    grid-column: 1 / span 2;
-    font-size: 5rem;
-}
-
 .post-tiptrick {
     grid-column: 1 / span 2;
-    /* align-self: flex-end; */
 }
-
 
 #id_content {
     width: 90%;
     height: 5rem;
 }
 
-.view-tiptrick {
-    display: grid;
-    grid-template-columns: 2fr 6fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;  
-    font-size: 2rem;
-    width: 75%;
-}
-
-.content {
-    grid-column: 1 / span 3;
+.table-chef {
     font-size: 2rem;
 }
 
-.tiptrickchef {
-    grid-column: 1 / span 3;
-    font-size: 2rem;
-}
-
-.tiptrickdate {
-    grid-column: 1 / span 2;
+.table-date {
     font-size: 1.5rem;
+}
+
+.content-table {
+    width: 100%;
+    font-size: 2rem;
+}
+
+.content-table > * {
+    border: 1px solid black;
+}
+
+.table-headers {
+    font-size: 5rem;
+}
+
+.all-comment, .all-tiptrick {
+    padding: 5rem 5rem 10rem 5rem;
+    border-style: ridge;
+    margin: 3rem 2rem 0;
+}
+
+.all-comment {
+    border-right: 1px solid black;
+}
+
+.delete-content {
+    width: 3rem;
+    background-color: black;
+    color: white;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.delete-content:hover {
+    background-color: red;
+    color: white;
+    border: .1rem solid red;
+}
+
+.delete-cell {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* --- NEW/UPDATE RECIPE FORM --- */
+.recipe-form {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.recipe-form > form > table {
+    width: 100%;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.recipe-form > form > input.btn {
+    width: 40%;
+    margin: 0 auto;
+}
+
+.recipe-form > h1 {
+    grid-column: 1 / span 3;
+    text-align: center;
+}
+
+input[type="number" i], input[type="text" i], textarea {
+    width: 100%;
+    height: 3rem;
+    text-align: left;
+}
+
+.form-title {
+    font-size: 2rem;
+    width: 25%;
+}
+
+#recipe-form {
+    text-align: center;
+}
+
+
+/* -- CONFIRM DELETE PAGES -- */
+.confirm-delete {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 50%;
+}
+
+.confirm-delete > form, .confirm-delete > h2, .confirm-delete > h1 {
+    margin: 0 auto;
 }

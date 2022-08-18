@@ -7,6 +7,8 @@
 
 <p>Please use the Sign Up or Login links above to access all the features SimplyRecipes has to offer!</p>
 
+<h1><a href="{% url 'detail' recipe.id %}">{{ recipe.title }}</a></h1>
+
 <!-- {% if object %}
     <div>
         <h2>{{ object.title }}</h2>

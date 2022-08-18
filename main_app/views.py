@@ -2,6 +2,8 @@ import os
 import uuid
 import boto3
 
+from random import choice
+
 from django.shortcuts import render, redirect
 # from django.http import HttpResponse
 from django.contrib.auth import login
@@ -15,7 +17,10 @@ from .forms import CommentForm, TipTrickForm
 
 # Create your views here.
 def home(request):
-  return render(request, 'home.html')
+  recipeIds = Recipe.objects.values_list('id', flat=True)
+  randomId = choice(recipeIds)
+  recipe = Recipe.objects.get(id=randomId)
+  return render(request, 'home.html', { 'recipe': recipe })
 
 
 def about(request):
