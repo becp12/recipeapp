@@ -1,29 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
 
+
 {% if object %}
+<div class="recipe-form">
   <h1>Edit {{ object.title }}</h1>
   <form action="" method="POST" id="recipe-form">
     {% csrf_token %}
     <table>
         <tr>
-          <td>Title:</td>
+          <td class="form-title">Title:</td>
           <td><input name="title" type="text" value="{{ object.title }}" required></td>
         </tr>
         <tr>
-          <td>Servings:</td>
+          <td class="form-title">Servings:</td>
           <td><input name="servings" type="number" value="{{ object.servings }}" ></td>
         </tr>
         <tr>
-          <td>Prep Time:</td>
+          <td class="form-title">Prep Time:</td>
           <td><input name="preptime" type="number" value="{{ object.preptime }}" ></td>
         </tr>
         <tr>
-          <td>Cooking Time:</td>
+          <td class="form-title">Cooking Time:</td>
           <td><input name="cookingtime" type="number" value="{{ object.cookingtime }}" ></td>
         </tr>
         <tr>
-          <td>Category:</td>
+          <td class="form-title">Category:</td>
           <td>
             <select name="category" id="category">
               <!-- <option value="" disabled selected>Select a Category</option> -->
@@ -37,42 +39,43 @@
           </td>
         </tr>
         <tr>
-          <td>Ingredients:</td>
-          <td><textarea name="ingredients" id="recipe-form" cols="20" rows="10" placeholder="Please add your ingredients, and make a new line for each ingredient.">{{ object.ingredients }}</textarea></td>
+          <td class="form-title">Ingredients:</td>
+          <td><textarea name="ingredients" id="" cols="20" rows="10" placeholder="Please add your ingredients, and make a new line for each ingredient.">{{ object.ingredients }}</textarea></td>
         </tr>
         <tr>
-          <td>Method:</td>
+          <td class="form-title">Method:</td>
           <td><textarea name="method" id="" cols="20" rows="10" required>{{ object.method }}</textarea></td>
         </tr>
     </table>
-    <input type="submit" value="Update Recipe">
-</form>
-
+    <input type="submit" value="Update Recipe" class="btn">
+  </form>
+</div>
 
 
 {% else %}
+<div class="recipe-form">
   <h1>Add Recipe</h1>
   <form action="" method="POST" id="recipe-form">
       {% csrf_token %}
       <table>
           <tr>
-            <td>Title:</td>
+            <td class="form-title">Title:</td>
             <td><input name="title" type="text" required></td>
           </tr>
           <tr>
-            <td>Servings:</td>
+            <td class="form-title">Servings:</td>
             <td><input name="servings" type="number" required></td>
           </tr>
           <tr>
-            <td>Prep Time:</td>
+            <td class="form-title">Prep Time:</td>
             <td><input name="preptime" type="number" required></td>
           </tr>
           <tr>
-            <td>Cooking Time:</td>
+            <td class="form-title">Cooking Time:</td>
             <td><input name="cookingtime" type="number" required></td>
           </tr>
           <tr>
-            <td>Category:</td>
+            <td class="form-title">Category:</td>
             <td>
               <select name="category" required>
                 <option value="" disabled selected>Select a Category</option>
@@ -85,17 +88,17 @@
             </td>
           </tr>
           <tr>
-            <td>Ingredients:</td>
-            <td><textarea name="ingredients" id="recipe-form" cols="20" rows="10" placeholder="Please add your ingredients, and make a new line for each ingredient." required></textarea></td>
+            <td class="form-title">Ingredients:</td>
+            <td><textarea name="ingredients" id="" cols="20" rows="10" placeholder="Please add your ingredients, and make a new line for each ingredient." required></textarea></td>
           </tr>
           <tr>
-            <td>Method:</td>
-            <td><textarea name="method" id="" cols="20" rows="10" placeholder="Please add your steps and make a new line for each step." required></textarea></td>
+            <td class="form-title">Method:</td>
+            <td><textarea name="method" id="" cols="20" rows="10" placeholder="Please add your steps, and make a new line for each step." required></textarea></td>
           </tr>
       </table>
-      <input type="submit" value="Add Recipe">
+      <input type="submit" value="Add Recipe" class="btn">
   </form>
-
+</div>
 {% endif %}
 
 {% endblock %}
