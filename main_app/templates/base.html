@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="shortcut icon" type="image" href="https://i.imgur.com/McOVznj.png" />
     <title>Simply Recipes</title>
 </head>
 <body>
@@ -15,7 +16,6 @@
         <nav>
             <ul>
                 <li><a href="{% url 'home' %}">Home</a></li> <!--SHOWS SINGLE RANDOM RECIPE AND ENCOURAGES SIGN UP-->
-                <li><a href="{% url 'about' %}">About</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'index' %}">View All Recipes</a></li> <!--GOES HERE ONCE THEY LOG IN-->
                     <li><a href="{% url 'myindex' %}">My Recipes</a></li>

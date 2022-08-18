@@ -10,10 +10,14 @@ html {
 
 body {
     position: relative;
+    background-color: #cabbad;
+    height: 100%;
 }
 
 header {
-    background-color: lightgray;
+    background-image: url("https://i.imgur.com/Z91hoTY.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
     display: flex;
     justify-content: flex-end;
     width: 100%;
@@ -44,11 +48,13 @@ nav > ul > li > a {
     justify-content: center;
     font-size: 2rem;
     padding: 1rem;
-    color: black;
+    color: bisque;
+    font-weight: 900;
 }
 
 nav > ul > li > a:hover, nav > ul > li > a:visited {
-    color: black;
+    color: whitesmoke;
+    font-weight: 900;
 }
 
 h1 {
@@ -74,17 +80,18 @@ footer {
 }
 
 .btn {
-    background-color: skyblue;
-    color: blue;
+    background-color: sienna;
+    color: bisque;
     border: .1rem solid black;
     padding: 1rem;
     border-radius: 1rem;
     width: 15rem;
+    text-align: center;
 }
 
 .btn:hover {
-    background-color: lightblue;
-    color: blue;
+    background-color: peru;
+    color: bisque;
 }
 
 input#file-upload-button {
@@ -97,6 +104,22 @@ input#file-upload-button:hover {
     color: black;
 }
 
+
+/* --- HOMEPAGE VIEW --- */
+.home {
+    text-align: center;
+}
+
+.homepage-recipe {
+    display: grid;
+    width: 30%;
+    margin: 0 auto;
+}
+
+.home > h2 > a, .home > h2 > a:hover, .home > h2 > a:visited {
+    color: sienna;
+}
+
 /* --- INDEX / MY INDEX VIEW --- */
 .all-recipes {
     display: grid;
@@ -104,6 +127,8 @@ input#file-upload-button:hover {
     grid-template-rows: auto;
     margin: 0 3rem;
 }
+
+
 
 .recipe-card {
     position: relative;
@@ -205,16 +230,11 @@ input#file-upload-button:hover {
     font-size: 1.5rem;
     border: 1px dotted black;
     padding: 1rem;
+    background-color: whitesmoke;
 }
 
 .heading, .contentheader {
     margin: 1rem;
-}
-
-.ingredients {
-    display: flex;
-    justify-content: flex-end;
-    
 }
 
 .add-photo, .edit-delete {
@@ -235,6 +255,13 @@ input#file-upload-button:hover {
     align-items: baseline;
     justify-content: center;
     margin-bottom: 1rem;
+}
+
+form.tiptrick-form{
+    margin: 0 auto;
+    text-align: left;
+    width: 100%;
+    font-size: 2rem;
 }
 
 .post-tiptrick {
@@ -271,6 +298,7 @@ input#file-upload-button:hover {
     padding: 5rem 5rem 10rem 5rem;
     border-style: ridge;
     margin: 3rem 2rem 0;
+    background-color: whitesmoke;
 }
 
 .all-comment {
@@ -345,4 +373,11 @@ input[type="number" i], input[type="text" i], textarea {
 
 .confirm-delete > form, .confirm-delete > h2, .confirm-delete > h1 {
     margin: 0 auto;
+}
+
+form {
+    margin: 0 auto;
+    text-align: left;
+    width: 35%;
+    font-size: 2rem;
 }

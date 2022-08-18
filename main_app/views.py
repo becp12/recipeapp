@@ -5,7 +5,6 @@ import boto3
 from random import choice
 
 from django.shortcuts import render, redirect
-# from django.http import HttpResponse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -21,10 +20,6 @@ def home(request):
   randomId = choice(recipeIds)
   recipe = Recipe.objects.get(id=randomId)
   return render(request, 'home.html', { 'recipe': recipe })
-
-
-def about(request):
-  return render(request, 'about.html')
 
 
 @login_required
@@ -90,7 +85,8 @@ def signup(request):
 class RecipeCreate(CreateView, LoginRequiredMixin):
   model = Recipe
   fields = ['title', 'servings', 'preptime', 'cookingtime', 'category', 'ingredients', 'method']
-  success_url = '/recipes/my/'
+  def get_success_url(self):
+    return f"/recipes/{self.object.id}"
 
   def form_valid(self, form):
     form.instance.chef = self.request.user
@@ -100,7 +96,8 @@ class RecipeCreate(CreateView, LoginRequiredMixin):
 class RecipeUpdate(UpdateView, LoginRequiredMixin):
   model = Recipe
   fields = ['title', 'servings', 'preptime', 'cookingtime', 'category', 'ingredients', 'method']
-  success_url = '/recipes/my/'
+  def get_success_url(self):
+    return f"/recipes/{self.object.id}"
 
 
 class RecipeDelete(DeleteView, LoginRequiredMixin):
@@ -110,12 +107,14 @@ class RecipeDelete(DeleteView, LoginRequiredMixin):
 
 class CommentDelete(DeleteView, LoginRequiredMixin):
   model = Comment
-  success_url = f'/recipes/{{recipe_id}}/'
+  def get_success_url(self):
+    return f"/recipes/{self.object.recipe.id}"
 
 
 class TipTrickDelete(DeleteView, LoginRequiredMixin):
   model = TipTrick
-  success_url = f'/recipes/{{recipe_id}}/'
+  def get_success_url(self):
+    return f"/recipes/{self.object.recipe.id}"
 
 
 def random(self):

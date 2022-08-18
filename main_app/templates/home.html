@@ -1,20 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Home</h1>
-
-<p>Do you enjoy cooking but never know what to cook? You've come to the right place!</p>
-
-<p>Please use the Sign Up or Login links above to access all the features SimplyRecipes has to offer!</p>
-
-<h1><a href="{% url 'detail' recipe.id %}">{{ recipe.title }}</a></h1>
-
-<!-- {% if object %}
-    <div>
-        <h2>{{ object.title }}</h2>
-        <p>Total Time: {{ object.preptime | add:object.cookingtime }} minutes</p>
+<div class="home">
+    <br>
+    <h1>Welcome to Simply Recipes!</h1>
+    <br>
+    <h2>Do you enjoy cooking but never know what to cook? You've come to the right place!</h2>
+    <h2>With Simply Recipes you will be able to create new recipes and view submissions by other users all in one place!</h2>
+    <h2>Here is a sample of what Simply Recipes has to offer:</h2>
+    <br>
+    <div class="homepage-recipe">
+        <a href="{% url 'detail' recipe.id %}" class="recipe-card" style="background-image: url('{{ recipe.photo_set.all.0.url }}')">
+            <div class="recipe-details">
+                <h2>{{ recipe.title }}</h2>
+                <h3>Total Time: {{ recipe.preptime | add:recipe.cookingtime }} minutes</h3>
+            </div>
+        </a>
     </div>
-{% endif %} -->
+    <br>
+    {% if request.user.is_authenticated %}
+        <h2></h2>
+    {% else %}
+        <h2>Please <a href="{% url 'signup' %}">Sign Up</a> or <a href="{% url 'login' %}">Log In</a> to access this feature and more!</h2>
+    {% endif %}
+</div>
+
 
 
 {% endblock %}
