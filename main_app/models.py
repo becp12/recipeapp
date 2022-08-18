@@ -27,14 +27,12 @@ class Recipe(models.Model):
     )
     method = models.TextField(max_length=1000)
     ingredients = models.TextField(max_length=500)
-    # photo = models.OneToOneField(Photo, on_delete=models.CASCADE, primary_key=True)
 
     def __str__(self):
-        return self.title
+        return f'{self.title} ({self.id})'
 
     def get_absolute_url(self):
         return reverse('home')
-        # , kwargs={'recipe_id': self.id}
 
     class Meta:
         ordering = ['title']
@@ -43,10 +41,6 @@ class Comment(models.Model):
     chef = models.ForeignKey(User, on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     content = models.TextField(max_length=500)
-    # rating = models.IntegerField(
-    #     default = 5,
-    #     validators = [MinValueValidator(0), MaxValueValidator(5)]
-    # )
     created = models.DateField(auto_now_add=True)
 
     def __str__(self):
