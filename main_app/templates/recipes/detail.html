@@ -9,7 +9,7 @@
 
     <div class="photo">
         {% for photo in recipe.photo_set.all %}
-        <img src="{{photo.url}}">
+        <img src="{{photo.url}}" class="detail-img">
         {% empty %}
         <div>No Photos Uploaded</div>
         {% endfor %}
@@ -20,10 +20,12 @@
         <h5 class="time">Prep Time: {{ recipe.preptime}}</h5>
         <h5 class="time">Cooking Time: {{ recipe.cookingtime }}</h5>
         <h5 class="category">Category: {{ recipe.get_category_display }}</h5>
-        <h5 class="heading">Method:</h5>
-        <h5 class="heading">Ingredients:</h5>
-        <h5 class="contentheader">{{ recipe.method|linebreaks }}</h5>
-        <h5 class="contentheader">{{ recipe.ingredients|linebreaks }}</h5>
+        <div class="method-ingred">
+            <h5 class="heading">Method:</h5>
+            <h5 class="heading">Ingredients:</h5>
+            <h5 class="contentheader method">{{ recipe.method|linebreaks }}</h5>
+            <h5 class="contentheader ingredients">{{ recipe.ingredients|linebreaks }}</h5>
+        </div>
     </div>
 
     {% if recipe.chef == request.user %}
@@ -44,24 +46,20 @@
 
     <div class="all-comment">
         <div class="add-comment">
-            <form action="{% url 'add_comment' recipe.id %}" method="POST">
+            <form action="{% url 'add_comment' recipe.id %}" method="POST" class="add-tiptrick">
                 {% csrf_token %}
-                <table>
-                    <tr>
-                        <td>Comments</td>
-                    </tr>
-                    {{ comment_form.as_table }}
-                </table>
-                <input type="submit" value="Post Comment" class="btn">
+                <p class="table-headers">Comments</p>
+                {{ comment_form.as_p }}
+                <input type="submit" value="Post Comment" class="btn post-tiptrick">
             </form>
         </div>
         <div class="view-comment">
             <table class="content-table">
                 {% for comment in recipe.comment_set.all %}
                     <tr>
-                        <td>{{ comment.chef }}</td>
-                        <td>{{ comment.created|date:"M d, Y" }}</td>
-                        <td rowspan="2"><a href="{% url 'comment_delete' comment.id %}"><button class="btn">X</button></a></td>
+                        <td class="table-chef">{{ comment.chef }}</td>
+                        <td class="table-date">{{ comment.created|date:"M d, Y" }}</td>
+                        <td rowspan="2" class="delete-cell"><a href="{% url 'comment_delete' comment.id %}"><button class="btn delete-content">X</button></a></td>
                     </tr>
                     <tr>
                         <td colspan="2">{{ comment.content|linebreaks }}</td>
@@ -71,37 +69,30 @@
         </div>
     </div>
 
-    <div class="all-tiptrick">
-        <!-- <div class="add-tiptrick">
-            <form action="{% url 'add_tiptrick' recipe.id %}" method="POST">
-                {% csrf_token %}
-                <table>
-                    <tr>
-                        <td colspan="2">Tips and Tricks</td>
-                    </tr>
-                    {{ tiptrick_form.as_table }}
-                </table>
-                <input type="submit" value="Post Tips or Tricks" class="btn">
-            </form>
-        </div> -->
 
-        <div>
+    <div class="all-tiptrick">
+        <div class="add-tiptrick">
             <form action="{% url 'add_tiptrick' recipe.id %}" method="POST" class="add-tiptrick">
                 {% csrf_token %}
-                <p class="tiptrickhead">Tips and Tricks</p>
-                {{ tiptrick_form.as_p }}
+                <p class="table-headers">Tips and Tricks</p>
+                {{ comment_form.as_p }}
                 <input type="submit" value="Post Tips or Tricks" class="btn post-tiptrick">
             </form>
         </div>
-                
-        {% for tiptrick in recipe.tiptrick_set.all %}
-            <div class="view-tiptrick">
-                    <p class="tiptrickchef">{{ tiptrick.chef }}</p>
-                    <p class="tiptrickdate">{{ tiptrick.created|date:"M d, Y" }}</p> 
-                    <p><a href="{% url 'tiptrick_delete' tiptrick.id %}"><button class="btn">X</button></a></p>
-                    <p class="content">{{ tiptrick.content }}</p>
-            </div>
-        {% endfor %}
+        <div class="view-comment">
+            <table class="content-table">
+                {% for tiptrick in recipe.tiptrick_set.all %}
+                    <tr>
+                        <td class="table-chef">{{ tiptrick.chef }}</td>
+                        <td class="table-date">{{ tiptrick.created|date:"M d, Y" }}</td>
+                        <td rowspan="2" class="delete-cell"><a href="{% url 'tiptrick_delete' tiptrick.id %}"><button class="btn delete-content">X</button></a></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">{{ tiptrick.content|linebreaks }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
     </div>
 </div>
 

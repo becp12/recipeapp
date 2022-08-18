@@ -36,8 +36,8 @@ class Recipe(models.Model):
         return reverse('home')
         # , kwargs={'recipe_id': self.id}
 
-    # class Meta:
-    #     ordering = ['-title']
+    class Meta:
+        ordering = ['title']
 
 class Comment(models.Model):
     chef = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -52,6 +52,9 @@ class Comment(models.Model):
     def __str__(self):
         return self.content
 
+    class Meta:
+        ordering = ['-created']
+
 
 class TipTrick(models.Model):
     chef = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -61,6 +64,9 @@ class TipTrick(models.Model):
 
     def __str__(self):
         return self.content
+
+    class Meta:
+        ordering = ['-created']
 
 
 class Photo(models.Model):
