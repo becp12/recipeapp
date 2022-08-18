@@ -25,8 +25,8 @@ class Recipe(models.Model):
         choices=CATEGORIES,
         default=CATEGORIES[0][0]
     )
-    method = models.TextField(max_length=1000)
-    ingredients = models.TextField(max_length=500)
+    method = models.TextField()
+    ingredients = models.TextField()
 
     def __str__(self):
         return f'{self.title} ({self.id})'
