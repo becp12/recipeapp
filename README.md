@@ -1,10 +1,10 @@
-<img src="https://i.imgur.com/pIAZUJ1.png">
+<p align="center"><img src="https://i.imgur.com/pIAZUJ1.png"></p>
 
-<center>
+<p align="center">
 <b>Ernest Maitland</b><br>
 <b>Tony Brockett</b><br>
 <b>Bec Preece</b><br>
-</center>
+</p>
 
 ## Background
 
